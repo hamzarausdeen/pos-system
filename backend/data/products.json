@@ -1,0 +1,29 @@
+[
+  {
+    "productCode": "1001",
+    "productName": "Long Grain Rice",
+    "categoryName": "Rice",
+    "buyingPrice": 30.0,
+    "sellingPrice": 40.0,
+    "priceType": "per100g",
+    "quantity": 100
+  },
+  {
+    "productCode": "1002",
+    "productName": "Coca Cola 500ml",
+    "categoryName": "Drinks",
+    "buyingPrice": 35.0,
+    "sellingPrice": 50.0,
+    "priceType": "unit",
+    "quantity": 50
+  },
+  {
+    "productCode": "1003",
+    "productName": "Banana (per 100g)",
+    "categoryName": "Vegetables",
+    "buyingPrice": 5.0,
+    "sellingPrice": 8.0,
+    "priceType": "per100g",
+    "quantity": 200
+  }
+]

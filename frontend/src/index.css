@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  @apply font-sans bg-[#f5fbf7] text-sky-950 dark:bg-[#07111f] dark:text-sky-50 transition-colors duration-300;
+  background-image: linear-gradient(135deg, rgba(240,249,255,0.9), rgba(245,251,255,0.92) 38%, rgba(235,245,255,0.85)),
+    radial-gradient(circle at top left, rgba(59,130,246,0.12), transparent 26%),
+    radial-gradient(circle at top right, rgba(14,165,233,0.08), transparent 24%),
+    radial-gradient(circle at bottom left, rgba(191,219,254,0.08), transparent 22%);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-3xl border border-sky-100 bg-white/85 shadow-soft backdrop-blur-xl dark:border-sky-400/15 dark:bg-slate-950/80;
+  }
+
+  .page-shell {
+    @apply min-h-screen;
+    background-color: #f5fbf7;
+    background-image: radial-gradient(circle at top left, rgba(148, 214, 179, 0.22), transparent 26%), radial-gradient(circle at bottom right, rgba(94, 193, 145, 0.14), transparent 24%);
+  }
+
+  .section-title {
+    @apply text-lg font-semibold tracking-tight text-sky-950 dark:text-sky-50;
+  }
+
+  .metric-value {
+    @apply text-3xl font-bold tracking-tight;
+  }
+
+  .input-base {
+    @apply w-full rounded-2xl border border-sky-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-500/15 dark:border-sky-400/20 dark:bg-slate-950;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-sky-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-sky-500 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-sky-500 dark:hover:bg-sky-400;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-sky-200 bg-white px-4 py-3 text-sm font-semibold text-sky-800 transition hover:bg-sky-50 dark:border-sky-900/50 dark:bg-slate-950 dark:text-sky-200 dark:hover:bg-slate-900;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-rose-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-rose-500;
+  }
+
+  .chip {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+  }
+}
+
+/* Role theme utilities: admin (blue) and cashier (indigo) */
+@layer components {
+  .role-admin {
+    --role-accent: #0ea5e9;
+    --role-accent-600: #2563eb;
+  }
+
+  .role-cashier {
+    --role-accent: #6366f1;
+    --role-accent-600: #4f46e5;
+  }
+
+  .theme-accent {
+    @apply text-sky-600 dark:text-sky-300;
+  }
+
+  .theme-heading {
+    @apply text-sky-950 dark:text-sky-50;
+  }
+
+  .theme-subtitle {
+    @apply text-sky-700/70 dark:text-sky-100/75;
+  }
+
+  /* Per-role overrides (when inside role-admin / role-cashier containers) */
+  .role-admin .theme-accent {
+    @apply text-sky-600 dark:text-sky-300;
+  }
+  .role-admin .theme-heading {
+    @apply text-sky-950 dark:text-sky-50;
+  }
+  .role-admin .theme-subtitle {
+    @apply text-sky-700/70 dark:text-sky-100/75;
+  }
+
+  .role-cashier .theme-accent {
+    @apply text-indigo-600 dark:text-indigo-300;
+  }
+  .role-cashier .theme-heading {
+    @apply text-indigo-950 dark:text-indigo-50;
+  }
+  .role-cashier .theme-subtitle {
+    @apply text-indigo-700/70 dark:text-indigo-100/75;
+  }
+
+}
+
+@layer components {
+  .nav-item {
+    @apply flex items-center gap-3 rounded-2xl px-4 py-3 text-sm font-medium transition;
+  }
+
+  .nav-inactive {
+    @apply text-sky-700 hover:bg-sky-100 dark:text-sky-200 dark:hover:bg-sky-500/10;
+  }
+
+  .nav-active {
+    @apply bg-sky-600 text-white shadow-lg shadow-sky-500/25;
+  }
+
+  .role-cashier .nav-inactive {
+    @apply text-indigo-700 hover:bg-indigo-100 dark:text-indigo-200 dark:hover:bg-indigo-500/10;
+  }
+
+  .role-cashier .nav-active {
+    @apply bg-indigo-600 text-white shadow-lg shadow-indigo-500/25;
+  }
+}
+
