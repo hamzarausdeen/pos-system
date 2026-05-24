@@ -1,86 +1,115 @@
-# Grocery Shop POS System
+# Grocery POS
 
-A full-stack Grocery POS web application built with React, Tailwind CSS, Vite, Node.js, Express, MySQL, and JWT authentication.
+A lightweight point-of-sale (POS) application for small grocery stores, split into a Node/Express backend and a React + Vite frontend.
 
-**Features:**
+## Table of contents
 
-- Role-based authentication: Admin and Cashier
-- Admin dashboard: sales, profit, stock, and recent activity
-- Category and product CRUD
-- Inventory tracking with low-stock alerts and history
-- Cashier POS: cart, billing, printable receipts
-- Sales & reports with charts
-- Responsive UI with light/dark theme support
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Repository Structure](#repository-structure)
+- [Setup](#setup)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+- [Seeding Sample Data](#seeding-sample-data)
+- [Development Notes](#development-notes)
+- [Contributing](#contributing)
 
-**Default demo accounts (seeded on DB init):**
+## Overview
 
-- **Admin:** admin@grocery.com / Admin123!
-- **Cashier:** cashier@grocery.com / Cashier123!
+This repository contains a simple grocery POS application intended for learning and small deployments. The backend exposes REST endpoints for authentication, products, inventory and sales. The frontend is a React single-page app that consumes those APIs.
 
-**Quick Start (local)**
+## Features
 
-**Prerequisites:** Node.js, npm, MySQL
+- User authentication (JWT)
+- Product and category management
+- Inventory and sales recording
+- Basic reports and dashboard views
 
-**Environment**
+## Tech Stack
 
-- Backend reads env from `backend/.env` (see `backend/.env.example`). Important vars:
-  - `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME`
-  - `PORT` (default 5000)
-- Frontend uses Vite and `VITE_API_URL` (optional). Defaults to `http://localhost:5000/api`.
+- Backend: Node.js, Express, MySQL (mysql2)
+- Frontend: React, Vite, Tailwind CSS
 
-**Install & Run Backend**
+## Repository Structure
 
-1. Create the database (example name used by default is set in `.env`):
-   ```bash
-   # use your MySQL client
-   CREATE DATABASE IF NOT EXISTS grocery_pos;
-   ```
-2. Install and start:
-   ```bash
-   cd backend
-   npm install
-   npm run dev   # nodemon for development
-   # or `npm start` to run once
-   ```
-3. On first start the server will initialize the schema and seed demo data (including the admin/cashier accounts and app settings).
+- `backend/` — Express API, DB init, scripts and sample data
+- `frontend/` — React app built with Vite
 
-**Install & Run Frontend**
+See the source folders for controllers, routes and components.
 
-1. Install and start:
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
-2. Open the app at the url printed by Vite (commonly `http://localhost:5173` or secondary port).
+## Setup
 
-**Notes about login & setup**
+Prerequisites: Node.js (16+), npm, and a running MySQL server.
 
-- The backend now seeds default admin and cashier users during DB initialization. The legacy `/api/setup` flow is disabled in this simplified deployment.
-- Use the demo credentials above to sign in. Admin users can access the dashboard; cashier users are redirected to the POS screen.
-- The app stores the session token in `localStorage` under `grocery-pos-token`.
+### Backend
 
-**API Endpoints (high level)**
+1. Open a terminal and install dependencies:
 
-- `POST /api/auth/login` — login returns `{ token, user }`
-- `GET /api/auth/me` — returns current user info (requires `Authorization: Bearer <token>`)
-- Category/product/sales/inventory/dashboard/report endpoints under `/api/*`
+```bash
+cd backend
+npm install
+```
 
-**Troubleshooting**
+2. Create a `.env` file in `backend/` with the following variables (example):
 
-- If frontend cannot reach the API, ensure `VITE_API_URL` matches backend (or use default `http://localhost:5000/api`).
-- Confirm backend is running and reachable: `GET http://localhost:5000/api/health` should return status ok.
-- If login returns 401, check credentials and ensure DB was initialized (server logs show schema init on startup).
+```
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=yourpassword
+DB_NAME=grocery_pos
+JWT_SECRET=change_this_secret
+```
 
-**Development notes**
+3. Initialize the database and start the server:
 
-- The app supports theme toggle (light/dark). There is a single theme toggle provided by the auth layout.
-- To restore or change the seeded credentials, edit `backend/src/config/initDatabase.js`.
+```bash
+# (optional) seed products from `backend/data/products.json`
+npm run seed:products
 
-**Contributing**
+# start in development (requires nodemon)
+npm run dev
 
-- Feel free to open issues or add features. Follow the repo structure: `frontend/` for UI, `backend/` for API.
+# or start normally
+npm start
+```
 
-**Contact**
+The backend listens on `http://localhost:5000` by default.
 
-- For questions about this local project, reply here or open an issue in your repo.
+### Frontend
+
+1. Install dependencies and start dev server:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+2. Open the app in the browser at the URL printed by Vite (usually `http://localhost:5173`).
+
+## Seeding Sample Data
+
+- Product data is stored in `backend/data/products.json` and can be imported with the script defined in `backend/package.json`:
+
+```bash
+cd backend
+npm run seed:products
+```
+
+This runs `scripts/importProducts.js` to add sample products to your database.
+
+## Development Notes
+
+- Backend entrypoint: `backend/src/index.js`
+- Frontend entrypoint: `frontend/src/main.jsx`
+- Environment configuration lives in `backend/.env` (not included in repo)
+
+## Contributing
+
+Contributions are welcome. Open an issue or submit a pull request with a clear description of changes.
+
+---
+
+If you'd like, I can also add a quick checklist for running the app locally or update the README with API endpoint examples. Tell me which you'd prefer.
