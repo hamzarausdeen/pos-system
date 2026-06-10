@@ -106,6 +106,18 @@ This runs `scripts/importProducts.js` to add sample products to your database.
 - Frontend entrypoint: `frontend/src/main.jsx`
 - Environment configuration lives in `backend/.env` (not included in repo)
 
+## Deployment Checklist
+
+If you deploy the frontend, make sure the hosting platform runs the build from the repository root. The root `package.json` forwards `npm run build` to the frontend workspace.
+
+Before deploying, set the frontend API base URL to your live backend, for example:
+
+```bash
+VITE_API_URL=https://your-backend-domain.com/api
+```
+
+If the frontend and backend are hosted on different domains, also update the backend `CORS_ORIGIN` to match the live frontend URL.
+
 ## Contributing
 
 Contributions are welcome. Open an issue or submit a pull request with a clear description of changes.
